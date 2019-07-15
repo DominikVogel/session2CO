@@ -14,11 +14,11 @@ session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
   sess_df <- n2kanalysis::session_package(sess)
 
   # Remove System and R version
-  sess_df <- filter(sess_df,
+  sess_df <- dplyr::filter(sess_df,
                     grepl("^(.*)+(Windows >\\=)(.*)+", Description)==FALSE)
-  sess_df <- filter(sess_df,
+  sess_df <- dplyr::filter(sess_df,
                     grepl("^(.*)+(macOS )(.*)+", Description)==FALSE)
-  sess_df <- filter(sess_df,
+  sess_df <- dplyr::filter(sess_df,
                     grepl("^(R)$", Description)==FALSE)
 
   # Create Rscript code
