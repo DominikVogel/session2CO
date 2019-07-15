@@ -45,7 +45,7 @@ session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
 
   sess_df_github <-
     dplyr::mutate(sess_df_github,
-                  code = paste0("RUN Rscript -e \'devtools::install_gitub(\"",
+                  code = paste0("RUN Rscript -e \'devtools::install_github(\"",
                                 sess_df_github$package,
                                 "\", upgrade_dependencies = FALSE, ref = \"v",
                                 sess_df_github$Version,
