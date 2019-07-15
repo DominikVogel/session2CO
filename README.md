@@ -10,7 +10,7 @@ Before installing the package you need to install the [``n2kanalysis``](https://
 devtools::install_github("inbo/n2kanalysis")
 ```
 
-Afterward, you can install ```session2CO from``` GitHub:
+Afterward, you can install ```session2CO``` from GitHub:
 
 ```r
 devtools::install_github("DominikVogel/session2CO")
