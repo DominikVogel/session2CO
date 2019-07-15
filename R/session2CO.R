@@ -11,7 +11,7 @@
 #' session2CO(sess = sess, path = "session2CO.txt")
 
 session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
-  # sess <- sessionInfo()
+  # Transform sessionInfo to data.frame
   sess_df <- n2kanalysis::session_package(sess)
 
   # Remove System and R version
@@ -21,19 +21,40 @@ session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
                     grepl("^(.*)+(macOS )(.*)+", Description)==FALSE)
   sess_df <- dplyr::filter(sess_df,
                     grepl("^(R)$", Description)==FALSE)
-  sess_df <- dplyr::filter(sess_df,
-                           grepl("^(compiler)$", Description)==FALSE)
 
-  # Create Rscript code
-  sess_df <-
-    dplyr::mutate(sess_df,
+  # Only packages from CRAN
+  sess_df_cran <- dplyr::filter(sess_df, Origin == "CRAN")
+
+  # Create Rscript code for CRAN packages
+  sess_df_cran <-
+    dplyr::mutate(sess_df_cran,
                   code = paste0("RUN Rscript -e \'options(warn=2); devtools::install_version(\"",
                                 Description,
                                 "\", version = \"",
                                 Version,
                                 "\")\'"))
 
-  code <- sess_df$code
+  # Only packages from GitHub
+  sess_df_github <-
+    dplyr::filter(sess_df, grepl("^(Github)(.*)+$", Origin))
+
+  sess_df_github <-
+    dplyr::mutate(sess_df_github,
+                  package = stringr::str_extract(Origin, "(?<=Github\\: )(.*)(?=@)"))
+
+  sess_df_github <-
+    dplyr::mutate(sess_df_github,
+                  code = paste0("RUN Rscript -e \'devtools::install_gitub(\"",
+                                package,
+                                "\", upgrade_dependencies = FALSE, ref = \"v",
+                                Version,
+                                "\")\'"))
+
+  # Combine CRAN and GitHub
+  code_cran <- sess_df_cran$code
+  code_github <- sess_df_github$code
+  code <- c(code_cran, code_github)
+
 
   # Write code to txt
   readr::write_lines(code, path = path)
