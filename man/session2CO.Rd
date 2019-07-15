@@ -18,10 +18,8 @@ Writes a file with RUN Rscript lines per package
 Converts the output of sessionInfo() in lines of RUN Rscript code for Code Ocean
 }
 \examples{
-\dontrun{
 sess <- sessionInfo()
 session2CO(sess = sess, path = "session2CO.txt")
-}
 }
 \keyword{Code}
 \keyword{Docker}
