@@ -4,12 +4,13 @@
 R package to converts the output of sessionInfo() to lines of RUN Rscript code for Code Ocean
 
 # Install
-Before installing the package, you need to install the [``n2kanalysis``](https://github.com/inbo/n2kanalysis) package from Github
+Before installing the package, you need to install the [``n2kanalysis``](https://github.com/inbo/n2kanalysis) and [``containerit``](https://github.com/o2r-project/containerit) packages from Github
 
 ```r
 # install devtools if not yet installed
 # install.packages("devtools")
 devtools::install_github("inbo/n2kanalysis")
+devtools::install_github("o2r-project/containerit")
 ```
 
 Afterward, you can install ```session2CO``` from GitHub:
