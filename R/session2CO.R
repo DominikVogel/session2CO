@@ -21,6 +21,8 @@ session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
                     grepl("^(.*)+(macOS )(.*)+", Description)==FALSE)
   sess_df <- dplyr::filter(sess_df,
                     grepl("^(R)$", Description)==FALSE)
+  sess_df <- dplyr::filter(sess_df,
+                           grepl("^(compiler)$", Description)==FALSE)
 
   # Create Rscript code
   sess_df <-
