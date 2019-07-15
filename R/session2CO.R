@@ -4,10 +4,12 @@
 #' @param sess Stored sessionInfo
 #' @param path A path and filename for to store the reuslts
 #' @keywords sessionInfo, Code Ocean, Docker
-#' @export
+#' @return Writes a file with RUN Rscript lines per package
 #' @examples
+#' \dontrun{
 #' sess <- sessionInfo()
 #' session2CO(sess = sess, path = "session2CO.txt")
+#' }
 
 session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
   # sess <- sessionInfo()

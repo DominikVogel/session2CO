@@ -11,12 +11,17 @@ session2CO(sess = NULL, path = paste0(getwd(), "/session2CO.txt"))
 
 \item{path}{A path and filename for to store the reuslts}
 }
+\value{
+Writes a file with RUN Rscript lines per package
+}
 \description{
 Converts the output of sessionInfo() in lines of RUN Rscript code for Code Ocean
 }
 \examples{
+\dontrun{
 sess <- sessionInfo()
 session2CO(sess = sess, path = "session2CO.txt")
+}
 }
 \keyword{Code}
 \keyword{Docker}
