@@ -1,0 +1,14 @@
+Package: session2CO
+Type: Package
+Title: Convert sessionInfo to Code Ocean
+Version: 0.1.0
+Author: Dominik Vogel
+Maintainer: Dominik Vogel <post@vogel-online.info>
+Description: Converts the Output of sessionInfo() in Lines of RUN Rscript Code for Code Ocean
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1.9000
+Import: n2kanalysis,
+  readr,
+  dplyr
+Remotes: inbo/n2kanalysis
