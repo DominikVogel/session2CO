@@ -3,6 +3,8 @@
 #' Converts the output of sessionInfo() in lines of RUN Rscript code for Code Ocean
 #' @param sess Stored sessionInfo
 #' @param path A path and filename for to store the reuslts
+#' @param github_ver Should the version of GitHub packages be included? Default is FALSE.
+#'    Can be problematic since maintainers need to add a GitHub release to their repository
 #' @keywords sessionInfo, Code Ocean, Docker
 #' @return Writes a file with RUN Rscript lines per package
 #' @export session2CO
@@ -10,7 +12,9 @@
 #' sess <- sessionInfo()
 #' session2CO(sess = sess, path = "session2CO.txt")
 
-session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
+session2CO <- function(sess = NULL,
+                       path = paste0(getwd(), "/session2CO.txt"),
+                       github_ver = FALSE) {
   # Transform sessionInfo to data.frame
   sess_df <- n2kanalysis::session_package(sess)
 
@@ -42,14 +46,23 @@ session2CO <- function(sess = NULL, path = paste0(getwd(), "/session2CO.txt")) {
     dplyr::mutate(sess_df_github,
                   package = stringr::str_extract(sess_df_github$Origin,
                                                  "(?<=Github\\: )(.*)(?=@)"))
+  if(github_ver == TRUE) {
+    sess_df_github <-
+      dplyr::mutate(sess_df_github,
+                    code = paste0("RUN Rscript -e \'devtools::install_github(\"",
+                                  sess_df_github$package,
+                                  "\", upgrade_dependencies = FALSE, ref = \"v",
+                                  sess_df_github$Version,
+                                  "\")\'"))
+  }
 
-  sess_df_github <-
-    dplyr::mutate(sess_df_github,
-                  code = paste0("RUN Rscript -e \'devtools::install_github(\"",
-                                sess_df_github$package,
-                                "\", upgrade_dependencies = FALSE, ref = \"v",
-                                sess_df_github$Version,
-                                "\")\'"))
+  if(github_ver == FALSE) {
+    sess_df_github <-
+      dplyr::mutate(sess_df_github,
+                    code = paste0("RUN Rscript -e \'devtools::install_github(\"",
+                                  sess_df_github$package,
+                                  "\", upgrade_dependencies = FALSE)\'"))
+  }
 
   # Combine CRAN and GitHub
   code_cran <- sess_df_cran$code

@@ -4,12 +4,16 @@
 \alias{session2CO}
 \title{Convert sessionInfo to Code Ocean}
 \usage{
-session2CO(sess = NULL, path = paste0(getwd(), "/session2CO.txt"))
+session2CO(sess = NULL, path = paste0(getwd(), "/session2CO.txt"),
+  github_ver = FALSE)
 }
 \arguments{
 \item{sess}{Stored sessionInfo}
 
 \item{path}{A path and filename for to store the reuslts}
+
+\item{github_ver}{Should the version of GitHub packages be included? Default is FALSE.
+Can be problematic since maintainers need to add a GitHub release to their repository}
 }
 \value{
 Writes a file with RUN Rscript lines per package

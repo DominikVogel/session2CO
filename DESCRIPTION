@@ -1,7 +1,7 @@
 Package: session2CO
 Type: Package
 Title: Convert sessionInfo to Code Ocean
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Dominik", "Vogel", email = "post@vogel-online.info",
                   role = c("aut", "cre"))
 Description: Converts the Output of sessionInfo() in Lines of 
