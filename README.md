@@ -1,5 +1,5 @@
 ![GitHub](https://img.shields.io/github/license/dominikvogel/r-teaching-script.svg) ![](https://img.shields.io/github/release/DominikVogel/session2CO.svg) [![Build
-Status](https://travis-ci.org/o2r-project/containerit.svg?branch=master)](https://travis-ci.org/o2r-project/containerit)
+Status](https://travis-ci.org/DominikVogel/session2CO.svg?branch=master)](https://travis-ci.org/DominikVogel/session2CO)
 
 # ``session2CO``
 R package to converts the output of sessionInfo() to lines of ``RUN Rscript ...`` code for Code Ocean
