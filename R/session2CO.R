@@ -70,6 +70,12 @@ session2CO <- function(sess = NULL,
   code <- c(code_cran, code_github)
 
 
+  # Fetch system requirements
+  dockerprint <- print(containerit::dockerfile(from = sess))
+
+  # Combine with code
+  code <- c(code, dockerprint@instructions[[1]]@commands)
+
   # Write code to txt
   readr::write_lines(code, path = path)
 

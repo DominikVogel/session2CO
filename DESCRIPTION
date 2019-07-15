@@ -13,5 +13,7 @@ RoxygenNote: 6.1.1.9000
 Imports: n2kanalysis,
   readr,
   dplyr,
-  stringr
+  stringr,
+  containerit
 Remotes: inbo/n2kanalysis
+  o2r-project/containerit
